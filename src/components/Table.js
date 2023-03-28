@@ -2,8 +2,14 @@ import { useContext } from 'react';
 import Context from '../context/myContext';
 
 function Table() {
-  const { data } = useContext(Context);
-  console.log(data);
+  const { data, searchInput } = useContext(Context);
+
+  const arrayFilter = data.filter((filterPlanet) => (
+    searchInput === '' ? data : (
+      filterPlanet.name.toLowerCase().includes(searchInput.toLowerCase())
+    )
+  ));
+
   return (
     <fieldset>
       <table>
@@ -26,7 +32,7 @@ function Table() {
         </thead>
         <tbody>
           {
-            data.map((planet, i) => (
+            arrayFilter.map((planet, i) => (
               <tr key={ i }>
                 <td>{planet.name}</td>
                 <td>{planet.rotation_period}</td>
