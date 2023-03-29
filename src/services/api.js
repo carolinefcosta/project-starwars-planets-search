@@ -12,7 +12,7 @@ function useFetch() {
     setLoading(false);
   }, []);
 
-  return [loading, data];
+  return [loading, data, setData];
 }
 
 export default useFetch;

@@ -4,11 +4,12 @@ import Context from '../context/myContext';
 function Table() {
   const { data, searchInput } = useContext(Context);
 
-  const arrayFilter = data.filter((filterPlanet) => (
-    searchInput === '' ? data : (
+  const arrayFilter = data.filter((filterPlanet) => {
+    const searchName = searchInput === '' ? data : (
       filterPlanet.name.toLowerCase().includes(searchInput.toLowerCase())
-    )
-  ));
+    );
+    return searchName;
+  });
 
   return (
     <fieldset>
