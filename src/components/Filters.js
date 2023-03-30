@@ -22,6 +22,7 @@ function Filters() {
   } = useContext(Context);
 
   const fieldsFiltered = fields.filter((element) => !columns.includes(element));
+  console.log(fieldsFiltered);
 
   return (
     <>
@@ -43,13 +44,13 @@ function Filters() {
         <label htmlFor="column-filter">
           Coluna:
           <select
-            onChange={ (e) => setColumn(e.target.value) }
+            onClick={ (e) => setColumn(e.target.value) }
             data-testid="column-filter"
             id="column-filter"
           >
             {
-              fieldsFiltered.map((element) => (
-                <option key={ element } value={ element }>{element}</option>
+              fieldsFiltered.map((element, index) => (
+                <option key={ index } value={ element }>{element}</option>
               ))
             }
           </select>
@@ -86,11 +87,19 @@ function Filters() {
         >
           Filtrar
         </button>
+        <button
+          data-testid="button-remove-filters"
+        >
+          Remover Filtros
+        </button>
       </div>
       <div>
         {
           filters.map((resultFiltered) => (
-            <p key={ resultFiltered } value={ resultFiltered }>{resultFiltered}</p>
+            <div key={ resultFiltered } data-testid="filter">
+              <p value={ resultFiltered }>{resultFiltered}</p>
+              <button>Excluir</button>
+            </div>
           ))
         }
       </div>
