@@ -7,22 +7,42 @@ export default function MyProvider({ children }) {
   const [loading, data, setData] = useFetch();
   const [searchInput, setSearchInput] = useState('');
   const [column, setColumn] = useState('population');
+  const [filters, setFilters] = useState([]);
+  const [columns, setColumns] = useState([]);
   const [operator, setOperator] = useState('maior que');
   const [number, setNumber] = useState(0);
 
   const filterFields = () => {
     if (operator === 'maior que') {
-      const resultOperator = data
+      const searchResult = data
         .filter((filterPlanet) => Number(filterPlanet[column]) > Number(number));
-      setData(resultOperator);
+      setData(searchResult);
+      setFilters([...filters, [
+        column,
+        operator,
+        number,
+      ]]);
+      setColumns([...columns, column]);
     } else if (operator === 'menor que') {
-      const resultOperator = data
+      const searchResult = data
         .filter((filterPlanet) => Number(filterPlanet[column]) < Number(number));
-      setData(resultOperator);
+      setData(searchResult);
+      setFilters([...filters, [
+        column,
+        operator,
+        number,
+      ]]);
+      setColumns([...columns, column]);
     } else if (operator === 'igual a') {
-      const resultOperator = data
+      const searchResult = data
         .filter((filterPlanet) => Number(filterPlanet[column]) === Number(number));
-      setData(resultOperator);
+      setData(searchResult);
+      setFilters([...filters, [
+        column,
+        operator,
+        number,
+      ]]);
+      setColumns([...columns, column]);
     }
   };
 
@@ -39,6 +59,8 @@ export default function MyProvider({ children }) {
     setNumber,
     setData,
     filterFields,
+    filters,
+    columns,
   };
 
   return (

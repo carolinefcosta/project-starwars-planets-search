@@ -1,6 +1,13 @@
 import { useContext } from 'react';
 import Context from '../context/myContext';
 
+const fields = [
+  'population',
+  'orbital_period',
+  'diameter',
+  'rotation_period',
+  'surface_water'];
+
 function Filters() {
   const {
     searchInput,
@@ -10,7 +17,12 @@ function Filters() {
     number,
     setNumber,
     filterFields,
+    columns,
+    filters,
   } = useContext(Context);
+
+  const fieldsFiltered = fields.filter((element) => !columns.includes(element));
+
   return (
     <>
       <h1>Projeto Star Wars - Trybe</h1>
@@ -35,11 +47,11 @@ function Filters() {
             data-testid="column-filter"
             id="column-filter"
           >
-            <option value="population">population</option>
-            <option value="orbital_period">orbital_period</option>
-            <option value="diameter">diameter</option>
-            <option value="rotation_period">rotation_period</option>
-            <option value="surface_water">surface_water</option>
+            {
+              fieldsFiltered.map((element) => (
+                <option key={ element } value={ element }>{element}</option>
+              ))
+            }
           </select>
         </label>
 
@@ -74,6 +86,13 @@ function Filters() {
         >
           Filtrar
         </button>
+      </div>
+      <div>
+        {
+          filters.map((resultFiltered) => (
+            <p key={ resultFiltered } value={ resultFiltered }>{resultFiltered}</p>
+          ))
+        }
       </div>
     </>
 
