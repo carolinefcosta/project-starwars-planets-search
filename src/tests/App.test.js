@@ -1,76 +1,94 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import { act } from '@testing-library/react';
 import App from '../App';
 import testData from '../../cypress/mocks/testData';
-
-// const planets = testData.results.name;
+import { fireEvent } from '@testing-library/react';
 
 describe('Requisito 05: Desenvolva testes para atingir 30% de cobertura total da aplicação', () => {
   beforeEach(() => {
-    jest.spyOn(global, 'fetch');
-    global.fetch.mockResolvedValue({
-      json: jest.fn().mockResolvedValue(testData),
+    global.fetch = jest.fn(() => Promise.resolve({
+      json: () => Promise.resolve(testData),
+    }));
+  })
+
+  test('Testando o fetch',() => {
+    act(() => {
+      render(<App />);
+    });
+
+    expect(global.fetch).toHaveBeenCalled();
+    expect(global.fetch).toHaveBeenCalledTimes(1);
+    expect(global.fetch).toHaveBeenCalledWith('https://swapi.dev/api/planets')
+  });
+
+  test('Testa inputs na tela', async () => {
+    await act( async () => {
+      render(<App />);
+    });
+
+    expect(screen.getByRole('heading', {  name: /Projeto Star Wars - Trybe/i })).toBeInTheDocument();
+    expect(screen.getByTestId('name-filter')).toBeInTheDocument();
+    expect(screen.getByTestId('column-filter')).toBeInTheDocument();
+    expect(screen.getByTestId('comparison-filter')).toBeInTheDocument();
+    expect(screen.getByTestId('value-filter')).toBeInTheDocument();
+    expect(screen.getByTestId("button-filter")).toBeInTheDocument();
+    expect(screen.getByTestId("button-remove-filters")).toBeInTheDocument();
+  });
+
+  test('Testa tabela com cabeçalhos e seus respectivos valores', () => {
+    render(<App />);
+
+    const titlesData = [
+      'Name', 'Rotation Period', 'Orbital Period', 'Diameter', 'Climate', 
+      'Gravity', 'Terrain', 'Surface Water', 'Population', 'Films', 'Created', 
+      'Edited', 'Url',
+    ]
+
+    titlesData.forEach((title) => {
+      expect(screen.getByRole('columnheader', { name: title })).toBeInTheDocument();
     })
   })
 
-  test('Testando o fetch', async () => {
-    render(<App />);
+  test('Filtre os planetas que possuem a letra "o" no nome', async () => {
+    await act(async () => {
+      render(<App />);
+    });
 
-    expect(global.fetch).toHaveBeenCalledTimes(1);
-    expect(global.fetch).toHaveBeenCalledWith('https://swapi.dev/api/planets');
+    const input = await screen.findByTestId('name-filter');
+    fireEvent.change(input, { target: { value: 'o' } });
+    expect(await screen.findAllByRole('row')).toHaveLength(8);
+    const planetNames = ['Coruscant', 'Dagobah', 'Endor', 'Hoth', 'Kamino', 'Naboo', 'Tatooine'];
+    for (const planetName of planetNames) {
+      expect(await screen.findByText(planetName)).toBeInTheDocument();
+    }
   });
 
-  test('Testa componente Filters', () => {
-    render(<App />);
+  test('Filtre planetas que possuem a letra "oo" no nome', async () => {
+    await act(async () => {
+      render(<App />);
+    });
 
-    const h1Title = screen.getByRole('heading', {  name: /Projeto Star Wars - Trybe/i });
-    expect(h1Title).toBeVisible();
-
-    const inputBusca = screen.getByTestId('name-filter');
-    expect(inputBusca).toBeVisible();
-
-    const inputColumn = screen.getByTestId('column-filter');
-    expect(inputColumn).toBeVisible();
-    expect(inputColumn).toHaveLength(5);
-
-    const inputOperator = screen.getByTestId('comparison-filter');
-    expect(inputOperator).toBeVisible();
-    expect(inputOperator).toHaveLength(3);
-
-    const inputNumber = screen.getByTestId('value-filter');
-    expect(inputNumber).toBeVisible();
-
-    const button = screen.getByRole('button', { name: /Filtrar/i });
-    expect(button).toBeVisible();
+    const input = await screen.findByTestId('name-filter');
+    fireEvent.change(input, { target: { value: 'oo' } });
+    expect(await screen.findAllByRole('row')).toHaveLength(3);
+    const planetNames = ['Naboo', 'Tatooine'];
+    for (const planetName of planetNames) {
+      expect(await screen.findByText(planetName)).toBeInTheDocument();
+    }
   });
 
-  test('Testa componente Table', () => {
-    render(<App />);
+  test('Filtre utilizando a comparação "maior que"', async () => {
+    await act(async () => {
+      render(<App />);
+    });
 
-    expect(screen.getByText('Name')).toBeInTheDocument();
-    expect(screen.getByText('Rotation Period')).toBeInTheDocument();
-    expect(screen.getByText('Orbital Period')).toBeInTheDocument();
-    expect(screen.getByText('Diameter')).toBeInTheDocument();
-    expect(screen.getByText('Climate')).toBeInTheDocument();
-    expect(screen.getByText('Gravity')).toBeInTheDocument();
-    expect(screen.getByText('Terrain')).toBeInTheDocument();
-    expect(screen.getByText('Surface Water')).toBeInTheDocument();
-    expect(screen.getByText('Population')).toBeInTheDocument();
-    expect(screen.getByText('Films')).toBeInTheDocument();
-    expect(screen.getByText('Created')).toBeInTheDocument();
-    expect(screen.getByText('Edited')).toBeInTheDocument();
-    expect(screen.getByText('Url')).toBeInTheDocument();
+    fireEvent.change(await screen.findByTestId('column-filter'), { target: { value: 'diameter' } });
+    fireEvent.change(await screen.findByTestId('comparison-filter'), { target: { value: 'maior que' } });
+    fireEvent.change(await screen.findByTestId('value-filter'), { target: { value: '8900' } });
+    fireEvent.click(await screen.findByTestId("button-filter"));
+
+    expect(await screen.findAllByRole('row')).toHaveLength(8);
   });
 
-  // test('Testa se possui 10 planetas', async () => {
-  //   planets.forEach(({ name }) => {
-  //     expect(screen.getByRole('cell', { name })).toBeInTheDocument();
-  //   });
-  // });
 })
-
-// test('I am your test', () => {
-//   render(<App />);
-//   const linkElement = screen.getByText(/Hello, App!/i);
-//   expect(linkElement).toBeInTheDocument();
-// });

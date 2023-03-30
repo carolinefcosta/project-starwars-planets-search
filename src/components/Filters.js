@@ -19,10 +19,11 @@ function Filters() {
     filterFields,
     columns,
     filters,
+    removeFilters,
+    removeOneFilter,
   } = useContext(Context);
 
   const fieldsFiltered = fields.filter((element) => !columns.includes(element));
-  console.log(fieldsFiltered);
 
   return (
     <>
@@ -88,6 +89,8 @@ function Filters() {
           Filtrar
         </button>
         <button
+          onClick={ () => removeFilters() }
+          type="button"
           data-testid="button-remove-filters"
         >
           Remover Filtros
@@ -98,7 +101,15 @@ function Filters() {
           filters.map((resultFiltered) => (
             <div key={ resultFiltered } data-testid="filter">
               <p value={ resultFiltered }>{resultFiltered}</p>
-              <button>Excluir</button>
+              <button
+                onClick={ ({ target: { value } }) => {
+                  removeOneFilter(value);
+                } }
+                value={ resultFiltered[0] }
+              >
+                Excluir
+
+              </button>
             </div>
           ))
         }
