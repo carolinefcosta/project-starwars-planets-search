@@ -12,59 +12,20 @@ export default function MyProvider({ children }) {
   const [filters, setFilters] = useState([]);
   const [columns, setColumns] = useState([]);
 
+  // Auxílio do Mentor Pablo e colegas
   const filterFields = () => {
-    if (operator === 'maior que') {
-      const searchResult = data
-        .filter((filterPlanet) => Number(filterPlanet[column]) > Number(number));
-      setData(searchResult);
-      setFilters([...filters, [
-        column,
-        operator,
-        number,
-      ]]);
-      setColumns([...columns, column]);
-    } else if (operator === 'menor que') {
-      const searchResult = data
-        .filter((filterPlanet) => Number(filterPlanet[column]) < Number(number));
-      setData(searchResult);
-      setFilters([...filters, [
-        column,
-        operator,
-        number,
-      ]]);
-      setColumns([...columns, column]);
-    } else if (operator === 'igual a') {
-      const searchResult = data
-        .filter((filterPlanet) => Number(filterPlanet[column]) === Number(number));
-      setData(searchResult);
-      setFilters([...filters, [
-        column,
-        operator,
-        number,
-      ]]);
-      setColumns([...columns, column]);
-    }
+    setFilters([...filters, {
+      column,
+      operator,
+      number,
+    }]);
+    setColumns([...columns, column]);
   };
 
-  const removeOneFilter = async (value) => {
-    // if (operator === 'maior que') {
-    //   const searchResult = data
-    //     .filter((filterPlanet) => Number(filterPlanet[column]) > Number(number));
-    //   setData(searchResult);
-    // } else if (operator === 'menor que') {
-    //   const searchResult = data
-    //     .filter((filterPlanet) => Number(filterPlanet[column]) < Number(number));
-    //   setData(searchResult);
-    // } else if (operator === 'igual a') {
-    //   const searchResult = data
-    //     .filter((filterPlanet) => Number(filterPlanet[column]) === Number(number));
-    //   setData(searchResult);
-    // }
-    const newFilters = filters.filter(([c]) => c !== value);
+  const removeOneFilter = (objFilter) => {
+    const newFilters = filters.filter((filter) => filter.column !== objFilter.column);
     setFilters(newFilters);
-    const newColumns = columns.filter((c) => c !== value);
-    setColumns(newColumns);
-    await setData([...filters]);
+    setColumns(columns.filter((columnsInArray) => columnsInArray !== objFilter.column));
   };
 
   const removeFilters = () => {

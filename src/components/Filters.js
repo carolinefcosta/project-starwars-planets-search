@@ -96,16 +96,17 @@ function Filters() {
           Remover Filtros
         </button>
       </div>
+      {/* Auxílio do Mentor Pablo e colega Allex */}
       <div>
         {
-          filters.map((resultFiltered) => (
-            <div key={ resultFiltered } data-testid="filter">
-              <p value={ resultFiltered }>{resultFiltered}</p>
+          filters.map((obj) => (
+            <div key={ obj.column } data-testid="filter">
+              <p>{`${obj.column} ${obj.operator} ${obj.number}`}</p>
               <button
-                onClick={ ({ target: { value } }) => {
-                  removeOneFilter(value);
+                onClick={ () => {
+                  removeOneFilter(obj);
                 } }
-                value={ resultFiltered[0] }
+                value={ obj.column }
               >
                 Excluir
 
@@ -115,7 +116,6 @@ function Filters() {
         }
       </div>
     </>
-
   );
 }
 
