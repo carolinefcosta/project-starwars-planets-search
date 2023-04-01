@@ -21,6 +21,7 @@ function Filters() {
     filters,
     removeFilters,
     removeOneFilter,
+    ascDesc,
   } = useContext(Context);
 
   const fieldsFiltered = fields.filter((element) => !columns.includes(element));
@@ -109,11 +110,40 @@ function Filters() {
                 value={ obj.column }
               >
                 Excluir
-
               </button>
             </div>
           ))
         }
+      </div>
+      <div>
+        <label>
+          <input
+            type="radio"
+            name="sort"
+            value="asc"
+            label="Crescente"
+            onClick={ ({ target: { value } }) => ascDesc(value) }
+          />
+          Crescente:
+        </label>
+
+        <label>
+          <input
+            type="radio"
+            name="sort"
+            value="desc"
+            label="Decrescente"
+            onClick={ ({ target: { value } }) => ascDesc(value) }
+          />
+          Decrescente:
+        </label>
+
+        <button
+          type="button"
+          data-testid="column-sort-button"
+        >
+          Ordenar
+        </button>
       </div>
     </>
   );
