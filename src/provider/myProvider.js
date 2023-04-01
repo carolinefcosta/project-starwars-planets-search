@@ -34,32 +34,32 @@ export default function MyProvider({ children }) {
     setColumns([]);
   };
 
-  const menosUm = -1;
+  // const menosUm = -1;
 
-  const verifyInput = (a, b) => (
-    a.name < b.name === true ? menosUm : 0);
+  // const verifyInput = (a, b) => (
+  //   a.name < b.name === true ? menosUm : 0);
 
-  const verifyInputDesc = (a, b) => (
-    a.name > b.name === true ? menosUm : 0);
+  // const verifyInputDesc = (a, b) => (
+  //   a.name > b.name === true ? menosUm : 0);
 
-  const ascDesc = (value) => {
-    if (value === 'asc') {
-      data.sort((a, b) => {
-        if (columns === '') return verifyInput(a, b);
+  // const ascDesc = (value) => {
+  //   if (value === 'asc') {
+  //     data.sort((a, b) => {
+  //       if (columns === '') return verifyInput(a, b);
 
-        return a[columns] < b[columns] === true
-          ? menosUm : 0;
-      });
-    }
-    if (value === 'desc') {
-      data.sort((a, b) => {
-        if (columns === '') return verifyInputDesc(a, b);
+  //       return a[columns] < b[columns] === true
+  //         ? menosUm : 0;
+  //     });
+  //   }
+  //   if (value === 'desc') {
+  //     data.sort((a, b) => {
+  //       if (columns === '') return verifyInputDesc(a, b);
 
-        return a[columns] > b[columns] === true
-          ? menosUm : 0;
-      });
-    }
-  };
+  //       return a[columns] > b[columns] === true
+  //         ? menosUm : 0;
+  //     });
+  //   }
+  // };
 
   const value = {
     loading,
@@ -78,7 +78,7 @@ export default function MyProvider({ children }) {
     columns,
     removeFilters,
     removeOneFilter,
-    ascDesc,
+    // ascDesc,
   };
 
   return (

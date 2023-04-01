@@ -21,7 +21,7 @@ function Filters() {
     filters,
     removeFilters,
     removeOneFilter,
-    ascDesc,
+    // ascDesc,
   } = useContext(Context);
 
   const fieldsFiltered = fields.filter((element) => !columns.includes(element));
@@ -122,7 +122,7 @@ function Filters() {
             name="sort"
             value="asc"
             label="Crescente"
-            onClick={ ({ target: { value } }) => ascDesc(value) }
+            // onClick={ ({ target: { value } }) => ascDesc(value) }
           />
           Crescente:
         </label>
@@ -133,7 +133,7 @@ function Filters() {
             name="sort"
             value="desc"
             label="Decrescente"
-            onClick={ ({ target: { value } }) => ascDesc(value) }
+            // onClick={ ({ target: { value } }) => ascDesc(value) }
           />
           Decrescente:
         </label>
