@@ -1,3 +1,4 @@
+import '../styles/Filters.css';
 import { useContext } from 'react';
 import Context from '../context/myContext';
 
@@ -27,12 +28,14 @@ function Filters() {
   const fieldsFiltered = fields.filter((element) => !columns.includes(element));
 
   return (
-    <>
-      <h1>Projeto Star Wars - Trybe</h1>
+    <div className="div-filters">
+      <h1 className="h1-filters">☄️ Projeto Star Wars ☄️</h1>
       <div>
         <label htmlFor="name-filter">
-          Busca:
+          Pesquisar:
+          {' '}
           <input
+            className="search-input-filters"
             id="name-filter"
             data-testid="name-filter"
             type="text"
@@ -42,10 +45,12 @@ function Filters() {
           />
         </label>
       </div>
-      <div>
+      <div className="div-column-operation-number-btn-filter">
         <label htmlFor="column-filter">
           Coluna:
+          {' '}
           <select
+            className="select-filters"
             onClick={ (e) => setColumn(e.target.value) }
             data-testid="column-filter"
             id="column-filter"
@@ -57,23 +62,25 @@ function Filters() {
             }
           </select>
         </label>
-
         <label htmlFor="comparison-filter">
           Operador:
+          {' '}
           <select
             onChange={ (e) => setOperator(e.target.value) }
             data-testid="comparison-filter"
             id="comparison-filter"
+            className="select-filters"
           >
             <option value="maior que">maior que</option>
             <option value="menor que">menor que</option>
             <option value="igual a">igual a</option>
           </select>
         </label>
-
         <label htmlFor="value-filter">
           Número:
+          {' '}
           <input
+            className="input-filters"
             value={ number }
             onChange={ (e) => setNumber(e.target.value) }
             type="number"
@@ -81,21 +88,25 @@ function Filters() {
             id="value-filter"
           />
         </label>
-
         <button
+          className="btn-filters"
           onClick={ () => filterFields() }
           data-testid="button-filter"
           type="button"
         >
           Filtrar
         </button>
-        <button
-          onClick={ () => removeFilters() }
-          type="button"
-          data-testid="button-remove-filters"
-        >
-          Remover Filtros
-        </button>
+        <div>
+          <button
+            className="btn-filters"
+            onClick={ () => removeFilters() }
+            type="button"
+            data-testid="button-remove-filters"
+          >
+            Remover Filtros
+          </button>
+        </div>
+
       </div>
       {/* Auxílio do Mentor Pablo e colega Allex */}
       <div>
@@ -145,7 +156,7 @@ function Filters() {
           Ordenar
         </button>
       </div>
-    </>
+    </div>
   );
 }
 

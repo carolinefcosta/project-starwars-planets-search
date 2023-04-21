@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&display=swap');
+
+* {
+  margin: 0;
+  text-align: center;
+  font-family: 'Bruno Ace SC', cursive;
+}
+
+.div-filters {
+  background-image: url('../img//ca46e126dfd4fcb68d8d3dfb349ab711.gif');
+  background-repeat: repeat;
+  color: rgb(218, 218, 29);
+  padding: 5px;
+}
+
+.h1-filters {
+  padding: 10px;
+  color: rgb(218, 218, 29);
+}
+
+.search-input-filters {
+  padding: 5px;
+  margin-bottom: 5px;
+  background-color: rgba(170, 170, 170, 0.425);
+  border: rgb(218, 218, 29) 1px solid;
+  border-radius: 10px;
+  text-align: center;
+  width: 30%;
+  font-size: 15px;
+}
+
+.div-column-operation-number-btn-filter {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.select-filters {
+  padding: 2px;
+  background-color: rgba(255, 255, 255, 0.795);
+  border: none;
+  border-radius: 5px;
+}
+
+.input-filters {
+  padding: 2px;
+  background-color: rgba(255, 255, 255, 0.795);
+  border: none;
+  border-radius: 5px;
+  height: 20px;
+}
+
+.btn-filters {
+  background-color:  rgb(218, 218, 29);
+  border: none;
+  border-radius: 5px;
+  height: 20px;
+}
