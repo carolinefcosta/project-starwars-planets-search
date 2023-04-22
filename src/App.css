@@ -1,4 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&display=swap');
+
 * {
   text-align: center;
+  font-family: 'Bruno Ace SC', cursive;
+  margin: 0;
+  text-align: center;
+}
+
+body {
+  background-image: url('./img/ca46e126dfd4fcb68d8d3dfb349ab711.gif');
+  background-repeat: repeat;
+  align-items: center;
 }
 

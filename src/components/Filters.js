@@ -112,9 +112,14 @@ function Filters() {
       <div>
         {
           filters.map((obj) => (
-            <div key={ obj.column } data-testid="filter">
+            <div
+              key={ obj.column }
+              data-testid="filter"
+              className="div-filters-pesquisas"
+            >
               <p>{`${obj.column} ${obj.operator} ${obj.number}`}</p>
               <button
+                className="btn-filters-excluir"
                 onClick={ () => {
                   removeOneFilter(obj);
                 } }
@@ -135,9 +140,11 @@ function Filters() {
             label="Crescente"
             // onClick={ ({ target: { value } }) => ascDesc(value) }
           />
+          {' '}
           Crescente:
         </label>
-
+        {' '}
+        {' '}
         <label>
           <input
             type="radio"
@@ -146,12 +153,14 @@ function Filters() {
             label="Decrescente"
             // onClick={ ({ target: { value } }) => ascDesc(value) }
           />
+          {' '}
           Decrescente:
         </label>
-
+        {' '}
         <button
           type="button"
           data-testid="column-sort-button"
+          className="btn-filters"
         >
           Ordenar
         </button>

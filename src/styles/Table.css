@@ -1,0 +1,51 @@
+.fieldset-table {
+  display: flex;
+  border: none;
+}
+
+.tr-th-table {
+  display: flex;
+}
+
+th {
+  width: 95px;
+  padding: 5px;
+  background-color: rgba(255, 255, 0, 0.479);
+  color: #ffffff;
+  font-size: 14px;
+  border-right: 2px solid white;
+}
+
+.primeiro-th {
+  border-left: 2px solid white;
+}
+
+.tr-map-td {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+td {
+  padding: 5px;
+  font-size: 14px;
+  border-right: 2px solid white;
+  width: 95px;
+  color: white;
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; 
+}
+
+/* td:hover {
+  -webkit-transform: scale(1.5);
+  transform: scale(1.1);
+} */
+
+.primeiro-td {
+  border-left: 2px solid white;
+}
+
+
