@@ -36,5 +36,5 @@ Para rodar todos os testes:
   ```
   
 <p align="center">
-  <img width="600px" heigth="600px" src="src/images/trivia.gif" />
+  <img width="600px" heigth="600px" src="src/img/starwars.gif" />
 </p>
