@@ -35,7 +35,6 @@ Para rodar todos os testes:
   npm test
   ```
   
-  ![image](https://user-images.githubusercontent.com/115182342/233811532-9ddaf7e2-4928-479d-ac9c-d2b330a0c349.png)
-  
-  ![image](https://user-images.githubusercontent.com/115182342/233811568-44963103-bb09-47dd-8168-500b09fe9805.png)
-  
+<p align="center">
+  <img width="600px" heigth="600px" src="src/images/trivia.gif" />
+</p>
